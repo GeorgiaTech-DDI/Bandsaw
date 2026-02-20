@@ -1,0 +1,14 @@
+README.md
+pyproject.toml
+bandsaw/alert.py
+bandsaw/bandsaw_monitor.py
+bandsaw/hand_detection.py
+bandsaw/mpu_camera.py
+bandsaw/slit_detection.py
+bandsaw/video_capture.py
+bandsaw.egg-info/PKG-INFO
+bandsaw.egg-info/SOURCES.txt
+bandsaw.egg-info/dependency_links.txt
+bandsaw.egg-info/requires.txt
+bandsaw.egg-info/top_level.txt
+tests/test_bandsaw_monitor.py
