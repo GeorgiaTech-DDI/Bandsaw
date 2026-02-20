@@ -1,0 +1,22 @@
+Metadata-Version: 2.4
+Name: bandsaw
+Version: 1.0.0
+Summary: Package for the Bandsaw project in the MatrixLab VIP.
+Author-email: Rachel Lohan <rlohan3@gatech.edu>
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/GeorgiaTech-DDI/bandsaw
+Project-URL: Documentation, https://readthedocs.org
+Project-URL: Repository, https://github.com/GeorgiaTech-DDI/bandsaw
+Project-URL: Bug Tracker, https://github.com/GeorgiaTech-DDI/bandsaw/issues
+Keywords: bandsaw,hand,detection
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: numpy~=2.4.2
+Requires-Dist: opencv-python~=4.13.0.92
+Requires-Dist: mediapipe~=0.10.32
+Requires-Dist: smbus2~=0.6.0
+Requires-Dist: picamera2~=0.3.34
+
+# Bandsaw_MAXTRIX
