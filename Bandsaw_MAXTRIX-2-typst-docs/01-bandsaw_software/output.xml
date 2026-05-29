@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.2 (Python 3.13.12 on win32)" generated="2026-03-13T10:22:56.633100" rpa="false" schemaversion="5">
+<suite id="s1" name="Robot" source="C:\Users\rloha\Documents\Bandsaw_MAXTRIX\01-bandsaw_software\tests\robot">
+<suite id="s1-s1" name="Tests" source="C:\Users\rloha\Documents\Bandsaw_MAXTRIX\01-bandsaw_software\tests\robot\tests">
+<suite id="s1-s1-s1" name="BandsawTests" source="C:\Users\rloha\Documents\Bandsaw_MAXTRIX\01-bandsaw_software\tests\robot\tests\BandsawTests.robot">
+<test id="s1-s1-s1-t1" name="Expand Bounding Box Returns Expected" line="8">
+<kw name="Expand Bounding Box" owner="BandsawLibrary">
+<msg time="2026-03-13T10:22:56.873421" level="INFO">${bbox} = (0, 0, 150, 75)</msg>
+<var>${bbox}</var>
+<arg>10</arg>
+<arg>10</arg>
+<arg>100</arg>
+<arg>50</arg>
+<arg>scale=1.5</arg>
+<arg>frame_shape=${FRAME_SHAPE}</arg>
+<status status="PASS" start="2026-03-13T10:22:56.872741" elapsed="0.000713"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-13T10:22:56.874152" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${bbox[0]}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-13T10:22:56.873663" elapsed="0.000539"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-13T10:22:56.874801" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${bbox[1]}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-13T10:22:56.874374" elapsed="0.000468"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-13T10:22:56.875348" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${bbox[2]}</arg>
+<arg>150</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-13T10:22:56.874997" elapsed="0.000385"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-13T10:22:56.875887" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${bbox[3]}</arg>
+<arg>75</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-13T10:22:56.875531" elapsed="0.000389"/>
+</kw>
+<status status="PASS" start="2026-03-13T10:22:56.872085" elapsed="0.004002"/>
+</test>
+<test id="s1-s1-s1-t2" name="Smooth BBox Blends Values" line="15">
+<kw name="Smooth Bbox" owner="BandsawLibrary">
+<msg time="2026-03-13T10:22:56.877052" level="INFO">${res} = (93, 46, 73, 36, 0.0)</msg>
+<var>${res}</var>
+<arg>100,50,80,40,0</arg>
+<arg>90,45,70,35,0</arg>
+<status status="PASS" start="2026-03-13T10:22:56.876892" elapsed="0.000180"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-13T10:22:56.877538" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${res[0]}</arg>
+<arg>93</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-13T10:22:56.877204" elapsed="0.000365"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-13T10:22:56.878019" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${res[1]}</arg>
+<arg>46</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-13T10:22:56.877701" elapsed="0.000348"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-13T10:22:56.878463" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${res[2]}</arg>
+<arg>73</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-13T10:22:56.878180" elapsed="0.000311"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-13T10:22:56.878900" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${res[3]}</arg>
+<arg>36</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-13T10:22:56.878616" elapsed="0.000312"/>
+</kw>
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<msg time="2026-03-13T10:22:56.879356" level="INFO">Argument types are:
+&lt;class 'float'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${res[4]}</arg>
+<arg>0.0</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="PASS" start="2026-03-13T10:22:56.879073" elapsed="0.000320"/>
+</kw>
+<status status="PASS" start="2026-03-13T10:22:56.876574" elapsed="0.002954"/>
+</test>
+<test id="s1-s1-s1-t3" name="Finalize Detection Sets Final Slit" line="23">
+<kw name="Finalize Detection" owner="BandsawLibrary">
+<msg time="2026-03-13T10:22:56.880208" level="INFO">Slit detection finalized at (11.0, 21.0, 31.0, 41.0, 5.5)</msg>
+<msg time="2026-03-13T10:22:56.880255" level="INFO">${final} = (11.0, 21.0, 31.0, 41.0, 5.5)</msg>
+<var>${final}</var>
+<status status="PASS" start="2026-03-13T10:22:56.880126" elapsed="0.000143"/>
+</kw>
+<kw name="Length Should Be" owner="BuiltIn">
+<msg time="2026-03-13T10:22:56.880861" level="INFO">Length is 5.</msg>
+<arg>${final}</arg>
+<arg>5</arg>
+<doc>Verifies that the length of the given item is correct.</doc>
+<status status="PASS" start="2026-03-13T10:22:56.880389" elapsed="0.000514"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${final[0]} &gt; 0</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-03-13T10:22:56.881130" elapsed="0.000643"/>
+</kw>
+<status status="PASS" start="2026-03-13T10:22:56.879899" elapsed="0.002073"/>
+</test>
+<test id="s1-s1-s1-t4" name="Check Hand Near Boundary Overlap" line="28">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-03-13T10:22:56.882900" level="INFO">${hand} = 50,50,30,30</msg>
+<var>${hand}</var>
+<arg>50,50,30,30</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-03-13T10:22:56.882692" elapsed="0.000228"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-03-13T10:22:56.883274" level="INFO">${slit} = 60,60,30,10,0</msg>
+<var>${slit}</var>
+<arg>60,60,30,10,0</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-03-13T10:22:56.883077" elapsed="0.000222"/>
+</kw>
+<kw name="Check Hand Near Boundary" owner="BandsawLibrary">
+<msg time="2026-03-13T10:22:56.890669" level="INFO">${res} = True</msg>
+<var>${res}</var>
+<arg>${hand}</arg>
+<arg>${slit}</arg>
+<status status="PASS" start="2026-03-13T10:22:56.883447" elapsed="0.007275"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${res}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-03-13T10:22:56.891070" elapsed="0.000333"/>
+</kw>
+<status status="PASS" start="2026-03-13T10:22:56.882377" elapsed="0.009229"/>
+</test>
+<test id="s1-s1-s1-t5" name="Check Hand Near Boundary No Overlap" line="34">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-03-13T10:22:56.892675" level="INFO">${hand} = 0,0,10,10</msg>
+<var>${hand}</var>
+<arg>0,0,10,10</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-03-13T10:22:56.892439" elapsed="0.000255"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-03-13T10:22:56.893085" level="INFO">${slit} = 100,100,30,10,0</msg>
+<var>${slit}</var>
+<arg>100,100,30,10,0</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-03-13T10:22:56.892881" elapsed="0.000226"/>
+</kw>
+<kw name="Check Hand Near Boundary" owner="BandsawLibrary">
+<msg time="2026-03-13T10:22:56.893501" level="INFO">${res} = False</msg>
+<var>${res}</var>
+<arg>${hand}</arg>
+<arg>${slit}</arg>
+<status status="PASS" start="2026-03-13T10:22:56.893257" elapsed="0.000496"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>not ${res}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-03-13T10:22:56.893993" elapsed="0.000741"/>
+</kw>
+<status status="PASS" start="2026-03-13T10:22:56.892067" elapsed="0.003005"/>
+</test>
+<status status="PASS" start="2026-03-13T10:22:56.664118" elapsed="0.231609"/>
+</suite>
+<status status="PASS" start="2026-03-13T10:22:56.663090" elapsed="0.233386"/>
+</suite>
+<status status="PASS" start="2026-03-13T10:22:56.634500" elapsed="0.262662"/>
+</suite>
+<statistics>
+<total>
+<stat pass="5" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Robot" id="s1" pass="5" fail="0" skip="0">Robot</stat>
+<stat name="Tests" id="s1-s1" pass="5" fail="0" skip="0">Robot.Tests</stat>
+<stat name="BandsawTests" id="s1-s1-s1" pass="5" fail="0" skip="0">Robot.Tests.BandsawTests</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
