@@ -1,0 +1,18 @@
+# Virtual environment
+myenv/
+
+# Vendored library source trees
+opencv/
+opencv_contrib/
+
+# Recorded video output
+recordings/
+*.mp4
+
+# Test-harness output
+annot_out/
+recordings_annotated/
+
+# Python cache
+__pycache__/
+*.pyc

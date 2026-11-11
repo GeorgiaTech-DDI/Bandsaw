@@ -1,0 +1,235 @@
+# usb_led_control.py
+import os
+import time
+import threading
+import subprocess
+import sys
+import platform
+
+class USBLEDController:
+    """
+    Controller for USB LED devices.
+    Supports both simulated mode and real hardware.
+    """
+    def __init__(self, debug=False):
+        self.debug = debug
+        self.led_on = False
+        self.running = False
+        self.blink_thread = None
+        self.is_raspberry_pi = self._is_raspberry_pi()
+        
+        # Try to detect USB LED device
+        self.detected_device = self._detect_usb_led()
+        
+        if self.detected_device:
+            print(f"USB LED detected: {self.detected_device}")
+        elif not debug:
+            print("Warning: No USB LED detected. Alerts will be simulated.")
+        else:
+            print("Debug mode: USB LED simulation enabled")
+    
+    def _is_raspberry_pi(self):
+        """Check if running on a Raspberry Pi"""
+        if platform.system() == "Linux":
+            try:
+                with open('/proc/device-tree/model', 'r') as f:
+                    model = f.read()
+                    return 'raspberry pi' in model.lower()
+            except:
+                pass
+        return False
+    
+    def _detect_usb_led(self):
+        """
+        Attempt to detect a connected USB LED device
+        Returns the device path if found, None otherwise
+        """
+        if self.debug:
+            return "/dev/simulated_usb_led"
+            
+        try:
+            # For Linux systems (including Raspberry Pi)
+            if platform.system() == "Linux":
+                # Use lsusb to find USB devices
+                result = subprocess.run(['lsusb'], capture_output=True, text=True)
+                
+                # Look for common USB LED keywords in the output
+                output = result.stdout.lower()
+                for line in output.split('\n'):
+                    if any(keyword in line.lower() for keyword in 
+                           ['led', 'light', 'lamp', 'indicator', 'blink']):
+                        # Extract the bus and device number
+                        parts = line.split()
+                        if len(parts) >= 6:
+                            bus_dev = parts[1:3]  # Format: "Bus XXX Device YYY"
+                            if len(bus_dev) == 2:
+                                bus = bus_dev[0].split()[-1]
+                                device = bus_dev[1].split()[-1]
+                                return f"/dev/bus/usb/{bus}/{device}"
+            
+            # For Windows systems
+            elif platform.system() == "Windows":
+                # Simple detection of USB devices in Windows
+                result = subprocess.run(['wmic', 'path', 'Win32_USBControllerDevice', 'get', 'Dependent'], 
+                                        capture_output=True, text=True)
+                # This is a simplified detection that would need enhancement
+                # to actually identify specific USB LED devices
+                if 'USB' in result.stdout:
+                    return "USB LED device detected on Windows"
+            
+            # For macOS systems
+            elif platform.system() == "Darwin":
+                result = subprocess.run(['system_profiler', 'SPUSBDataType'], 
+                                        capture_output=True, text=True)
+                # Look for LED-related devices
+                if any(keyword in result.stdout.lower() for keyword in 
+                       ['led', 'light', 'lamp', 'indicator']):
+                    return "USB LED device detected on macOS"
+                    
+        except Exception as e:
+            print(f"Error detecting USB LED: {e}")
+        
+        return None
+    
+    def _control_led_linux(self, state):
+        """Control LED on Linux systems"""
+        if self.detected_device and not self.debug:
+            try:
+                # For actual hardware implementation, you might use:
+                # - libusb through PyUSB
+                # - Direct writes to USB device files
+                # - Platform-specific control methods
+                
+                # This is a placeholder for the actual implementation
+                # that would depend on your specific USB LED device
+                with open(self.detected_device, 'wb') as f:
+                    # Most simple USB LEDs use a simple protocol where
+                    # sending a byte like 0x01 turns it on, 0x00 turns it off
+                    f.write(b'\x01' if state else b'\x00')
+                return True
+            except Exception as e:
+                print(f"Error controlling USB LED: {e}")
+        return False
+    
+    def _control_led_windows(self, state):
+        """Control LED on Windows systems"""
+        if self.detected_device and not self.debug:
+            try:
+                # Windows implementation would typically use:
+                # - PyUSB library
+                # - Windows-specific USB APIs through ctypes
+                
+                # This is a placeholder for the actual implementation
+                print(f"Setting USB LED to {'ON' if state else 'OFF'} on Windows")
+                return True
+            except Exception as e:
+                print(f"Error controlling USB LED on Windows: {e}")
+        return False
+    
+    def _control_led_macos(self, state):
+        """Control LED on macOS systems"""
+        if self.detected_device and not self.debug:
+            try:
+                # macOS implementation would typically use:
+                # - PyUSB library
+                # - macOS-specific IOKit calls through ctypes
+                
+                # This is a placeholder for the actual implementation
+                print(f"Setting USB LED to {'ON' if state else 'OFF'} on macOS")
+                return True
+            except Exception as e:
+                print(f"Error controlling USB LED on macOS: {e}")
+        return False
+    
+    def _simulate_led(self, state):
+        """Simulate LED in debug mode"""
+        if state:
+            print("🔆 USB LED ON")
+        else:
+            print("⚫ USB LED OFF")
+        return True
+    
+    def set_led(self, state):
+        """
+        Set the USB LED state
+        
+        Args:
+            state: True for ON, False for OFF
+        """
+        self.led_on = state
+        
+        if self.debug:
+            return self._simulate_led(state)
+        
+        # Control based on platform
+        if platform.system() == "Linux":
+            return self._control_led_linux(state)
+        elif platform.system() == "Windows":
+            return self._control_led_windows(state)
+        elif platform.system() == "Darwin":  # macOS
+            return self._control_led_macos(state)
+        else:
+            print(f"Unsupported platform: {platform.system()}")
+            return False
+    
+    def turn_on(self):
+        """Turn the LED on"""
+        return self.set_led(True)
+    
+    def turn_off(self):
+        """Turn the LED off"""
+        return self.set_led(False)
+    
+    def toggle(self):
+        """Toggle the LED state"""
+        return self.set_led(not self.led_on)
+    
+    def _blink_thread_function(self, duration, interval):
+        """Thread function for blinking the LED"""
+        start_time = time.time()
+        while self.running and (time.time() - start_time < duration):
+            self.turn_on()
+            time.sleep(interval / 2)
+            self.turn_off()
+            time.sleep(interval / 2)
+    
+    def blink(self, duration=2.0, interval=0.5):
+        """
+        Blink the LED for a specific duration
+        
+        Args:
+            duration: Total duration to blink (seconds)
+            interval: Interval between blinks (seconds)
+        """
+        # Stop any existing blink thread
+        if self.blink_thread and self.blink_thread.is_alive():
+            self.running = False
+            self.blink_thread.join(timeout=0.5)
+        
+        # Start new blink thread
+        self.running = True
+        self.blink_thread = threading.Thread(
+            target=self._blink_thread_function,
+            args=(duration, interval)
+        )
+        self.blink_thread.daemon = True
+        self.blink_thread.start()
+        
+        return True
+
+# Example usage
+if __name__ == "__main__":
+    # Test the USB LED controller
+    led_controller = USBLEDController(debug=True)
+    
+    print("Testing USB LED...")
+    led_controller.turn_on()
+    time.sleep(1)
+    led_controller.turn_off()
+    time.sleep(1)
+    
+    print("Testing blink function...")
+    led_controller.blink(duration=5, interval=0.5)
+    time.sleep(5)  # Wait for blinking to complete
+    
+    print("Test complete.")

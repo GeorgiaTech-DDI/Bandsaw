@@ -1,0 +1,131 @@
+opencv-python>=4.5.0
+numpy>=1.19.0
+mediapipe>=0.8.0
+% # Optional dependencies
+% # RPi.GPIO>=0.7.0  # Uncomment for Raspberry Pi
+% # Bandsaw Safety Monitoring System
+
+% #A computer vision-based safety monitoring system for bandsaw operations. This system detects bandsaw activity through vibration sensors, identifies dangerous situations such as hands near the cutting area, and triggers alerts when unsafe conditions are detected.
+
+% ## Features
+
+% - **Vibration Detection**: Monitors bandsaw activity using an MPU6050 accelerometer (with mock simulation for testing)
+% - **Hand Detection**: Uses MediaPipe to detect hands in the camera feed
+% - **Slit Detection**: Identifies the bandsaw cutting area
+% - **Safety Alerts**: Triggers visual and audio alerts when hands approach the danger zone
+% - **Automatic Recording**: Records video clips when hands are detected near the machine
+% - **Debug Mode**: Fully functional testing environment without requiring actual hardware
+
+% ## Requirements
+
+% - Python 3.6+
+% - OpenCV
+% - NumPy
+% - MediaPipe (optional, falls back to a mock implementation)
+% - RPi.GPIO (optional, only needed on Raspberry Pi)
+
+% ## Installation
+
+% #1. Clone this repository:
+%    ```
+%    git clone https://github.com/yourusername/bandsaw-monitoring.git
+%    cd bandsaw-monitoring
+%    ```
+
+% 2. Install required packages:
+%    ```
+%    pip install opencv-python numpy
+%    ```
+
+% 3. Optional packages (recommended):
+%    ```
+%    pip install mediapipe
+%    ```
+
+% 4. On Raspberry Pi, install GPIO library:
+%    ```
+%    pip install RPi.GPIO
+%    ```
+
+% ## Usage
+
+% ### Running the System
+
+% The system can be run in two main modes:
+
+% 1. **Normal Mode** (requires actual hardware):
+%    ```
+%    python run_monitoring_system.py
+%    ```
+
+% 2. **Debug Mode** (simulates sensors for testing):
+%    ```
+%    python run_monitoring_system.py --debug
+%    ```
+
+% ### Command Line Options
+
+% ```
+% usage: run_monitoring_system.py [-h] [--debug] [--video VIDEO] [--record RECORD] [--threshold THRESHOLD] [--stabilization STABILIZATION] [--alert-interval ALERT_INTERVAL]
+
+% Bandsaw Safety Monitoring System
+
+% options:
+%   -h, --help            show this help message and exit
+%   --debug               Run in debug mode with simulated sensors (default: False)
+%   --video VIDEO         Video source (0 for webcam, or path to video file) (default: 0)
+%   --record RECORD       Directory to save recordings (default: recordings)
+
+% Advanced Settings:
+%   --threshold THRESHOLD
+%                         Vibration threshold for bandsaw detection (default: 0.5)
+%   --stabilization STABILIZATION
+%                         Stabilization time for slit detection (seconds) (default: 5.0)
+%   --alert-interval ALERT_INTERVAL
+%                         Minimum time between alerts (seconds) (default: 2.0)
+% ```
+
+% ### Debug Mode Controls
+
+% When running in debug mode, the following keyboard controls are available:
+
+% - **v** - Toggle simulated vibration (on/off)
+% - **s** - Manually start/stop slit detection
+% - **a** - Trigger an alert
+% - **h** - Simulate hand movement
+% - **r** - Toggle recording
+% - **i** - Show system information
+% - **q** - Quit
+
+% ## System Components
+
+% The monitoring system consists of several modules:
+
+% 1. **main.py** - Main application that coordinates all components
+% 2. **mpu6050_sensor.py** - Interface for the MPU6050 accelerometer (with mock implementation)
+% 3. **vibration_detection.py** - Processes vibration data to detect bandsaw activity
+% 4. **enhanced_slit_detection.py** - Computer vision algorithm to detect the bandsaw cutting area
+% 5. **hand_detection.py** - Uses MediaPipe to detect hands (with mock implementation)
+% 6. **alert_system.py** - Manages audio and visual alerts
+% 7. **video_capture.py** - Handles video input and recording
+
+% ## Configuration
+
+% The system can be configured by editing the relevant parameters in the command line arguments or by modifying the default values in the code.
+
+% ## Troubleshooting
+
+% - **"Error: Failed to open camera"** - Check that your camera is connected and not being used by another application
+% - **"Error: Cannot import module"** - Ensure all required packages are installed
+% - **"MediaPipe not available"** - This is normal if MediaPipe is not installed, a mock implementation will be used
+
+% ## License
+
+% This project is licensed under the MIT License - see the LICENSE file for details.
+
+% ## Acknowledgments
+
+% - [MediaPipe](https://mediapipe.dev/) for hand detection
+% - [OpenCV](https://opencv.org/) for computer vision functionality
+
+% '''

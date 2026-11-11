@@ -1,0 +1,17 @@
+This was an absolute pain to figure out. There are many ways to automatically
+start a program on a pi, and I had to spend hours working with ChatGPT to decide
+on the best one to use for this specific application, which involves terminal
+output and a camera display window which run constantly. This requires the GUI,
+so using systemd isn't as helpful in this case. We ended up using the .desktop
+method. The file located here:
+
+/home/pi/.config/autostart/bandsaw_monitor.desktop
+
+is automatically run when the GUI loads. This file has in it a command to run
+this file:
+
+/home/pi/Desktop/object_detection/start_bandsaw.sh
+
+which starts the bandsaw program. There isn't a good crying emoji fit to express
+how I feel after so long of banging my head on the table trying stuff and undoing
+my work and redoing my work, but I think it finally works now. Yay!
