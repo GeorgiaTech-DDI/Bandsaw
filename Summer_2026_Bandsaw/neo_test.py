@@ -8,7 +8,7 @@ NUM_PIXELS = 8  # Adjust to your strip length
 BRIGHTNESS = 0.5
 
 # Initialize NeoPixel strip using SPI (GPIO10 MOSI / Pin 19)
-pixels = neopixel_spi.NeoPixel_SPI(board.SPI(), NUM_PIXELS, brightness=BRIGHTNESS, auto_write=True)
+pixels = neopixel_spi.NeoPixel_SPI(board.SPI(), NUM_PIXELS, brightness=.2, auto_write=True)
 
 # Create a dummy window just for capturing keypress
 blank = np.zeros((200, 400, 3), dtype = np.uint8)
